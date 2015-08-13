@@ -15,6 +15,13 @@ public class Main {
     public static void main(String[] args){
         File file = new File("logs.txt");
         System.out.println("Starting to convert!");
+
+        String url = "jdbc:mysql://localhost:3306/squadstats";
+        String user = "root";
+        String password = "";
+
+        database = new DbManager(password, user, url);
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
@@ -32,6 +39,7 @@ public class Main {
 
                     //debug lines
                     System.out.println(timestamp + " " + name + ": " + text);
+                    database.addMessage(timestamp, text, name);
                 } else if(msg.length == 2 && msg[1].contains("left")){
                     //log a leave thingy
                 }
